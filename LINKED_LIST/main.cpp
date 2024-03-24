@@ -30,6 +30,18 @@ bool searchLinkedList(Node *head, int target)
     return false;
 }
 
+int Length(Node *head)
+{
+    int len = 0;
+    Node* curr = head;
+    while (curr != NULL)
+    {
+        len++;
+        curr = curr->_nxt;
+    }
+    return len;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
