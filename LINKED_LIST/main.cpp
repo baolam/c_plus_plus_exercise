@@ -42,6 +42,34 @@ int Length(Node *head)
     return len;
 }
 
+void insertAtBegining(Node **head_ref, int new_data)
+{
+    Node *node = new Node();
+    node->data = new_data;
+
+    node->_nxt = *head_ref;
+    *head_ref = node;
+}
+
+void insertAtEnd(Node **head_ref, int new_data)
+{
+    Node *node = new Node();
+    node->data = new_data;
+    node->_nxt = NULL;
+
+    Node *last = *head_ref;
+    if (*head_ref == NULL)
+    {
+        *head_ref = node;
+        return;
+    }
+
+    while (last->_nxt != NULL)
+        last = last->_nxt;
+
+    last->_nxt = node;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
