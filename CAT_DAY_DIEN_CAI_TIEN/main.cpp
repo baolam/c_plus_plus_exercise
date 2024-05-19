@@ -41,6 +41,6 @@ int main()
         }
         else r = m - 1;
     }
-    cout << -1;
+    cout << res;
     return 0;
 }
