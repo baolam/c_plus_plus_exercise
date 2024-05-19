@@ -25,13 +25,21 @@ int main()
     cin >> n >> k;
     for (int i = 1; i <= n; i++)
         cin >> a[i], sum += a[i];
-    for (int i = sum / k; i >= 1; i--)
+    // Nhận xét
+    // Hàm có dạng check(x)
+    // false false false true true ....
+    // Dùng tính chất tìm kiếm nhị phân trên dạng hàm như vậy
+    ll l = 1, r = sum / k;
+    ll res = 0;
+    while (l <= r)
     {
-        if (check(i))
+        ll m = (l + r) / 2;
+        if (check(m))
         {
-            cout << i;
-            return 0;
+            res = m;
+            l = m + 1;
         }
+        else r = m - 1;
     }
     cout << -1;
     return 0;
