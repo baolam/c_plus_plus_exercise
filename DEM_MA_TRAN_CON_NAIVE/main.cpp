@@ -4,8 +4,25 @@
 using namespace std;
 typedef long long ll;
 
-ll m, n;
+ll m, n, cnt = 0;
 ll a[maxn][maxn];
+
+bool check(int i1, int j1, int i2, int j2)
+{
+    if (a[i1][j1] == a[i1[j2])
+        return false;
+    if (a[i1][j1] == a[i2][j1])
+        return false;
+    if (a[i1][j1] == a[i2][j2])
+        return false;
+    if (a[i1][j2] == a[i2][j1])
+        return false;
+    if (a[i1][j2] == a[i2][j2])
+        return false;
+    if (a[i2][j1] == a[i2][j2])
+        return false;
+    return true;
+}
 
 int main()
 {
@@ -24,12 +41,12 @@ int main()
             {
                 for (int j2 = j1 + 1; j2 <= n; j2++)
                 {
-                    if (a[i1][j1] == a[i1][j2])
-                        continue;
-                    if ()
+                    if (check(i1, j1, i2, j2))
+                        cnt++;
                 }
             }
         }
     }
+    cout << cnt;
     return 0;
 }
