@@ -4,12 +4,14 @@
 using namespace std;
 typedef int ll;
 
+bool visited[maxn];
 ll n, a, b, gtln;
 ll t[maxn], edge[maxn][maxn], trace[maxn];
 
 bool bfs(ll val)
 {
     memset(trace, 0, sizeof(trace));
+    memset(visited, false, sizeof(visited));
     queue<ll> q;
     q.push(a);
     while (! q.empty())
@@ -19,8 +21,9 @@ bool bfs(ll val)
             return true;
         for (ll v = 1; v <= n; v++)
         {
-            if (edge[u][v] && trace[v] == 0 && (abs(t[v] - t[u]) <= val))
+            if (edge[u][v] && (! visited[v]) && (abs(t[v] - t[u]) <= val))
             {
+                visited[v] = true;
                 q.push(v);
                 trace[v] = u;
             }
@@ -30,19 +33,31 @@ bool bfs(ll val)
     return false;
 }
 
+void path()
+{
+    ll x = b;
+    while (x != a)
+    {
+        cout << x << ' ';
+        x = trace[x];
+    }
+    cout << a;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    freopen("VAO.INP", NULL, stdin);
-    freopen("RA.OUT", NULL, stdout);
+    freopen("VAO.INP", "r", stdin);
+    //freopen("RA.OUT", "w", stdout);
     cin >> n >> a >> b;
-    for (ll i = 1; i <= n; i++)
-        cin >> t[i], gtln = max(gtln, t[i]);
+    for (ll i = 1; i <= n; i++) {
+        cin >> t[i];
+        gtln = max(gtln, t[i]);
+    }
     ll u, v;
-    for (ll i = 1; i <= n; i++)
+    while (cin >> u >> v)
     {
-        cin >> u >> v;
         edge[u][v] = 1;
         edge[v][u] = 1;
     }
@@ -57,6 +72,7 @@ int main()
         }
         else l = m + 1;
     }
-    cout << res;
+    cout << res << '\n';
+    path();
     return 0;
 }
