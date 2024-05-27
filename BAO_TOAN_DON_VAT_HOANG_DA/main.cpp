@@ -5,18 +5,37 @@ using namespace std;
 typedef int ll;
 
 ll n, a, b, gtln;
-ll t[maxn], edge[maxn][maxn];
+ll t[maxn], edge[maxn][maxn], trace[maxn];
 
 bool bfs(ll val)
 {
+    memset(trace, 0, sizeof(trace));
     queue<ll> q;
-
+    q.push(a);
+    while (! q.empty())
+    {
+        ll u = q.front();
+        if (u == b)
+            return true;
+        for (ll v = 1; v <= n; v++)
+        {
+            if (edge[u][v] && trace[v] == 0 && (abs(t[v] - t[u]) <= val))
+            {
+                q.push(v);
+                trace[v] = u;
+            }
+        }
+        q.pop();
+    }
+    return false;
 }
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
+    freopen("VAO.INP", stdin, NULL);
+    freopen("RA.OUT", stdout, NULL);
     cin >> n >> a >> b;
     for (ll i = 1; i <= n; i++)
         cin >> t[i], gtln = max(gtln, t[i]);
@@ -38,6 +57,6 @@ int main()
         }
         else l = m + 1;
     }
-
+    cout << res;
     return 0;
 }
