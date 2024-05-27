@@ -34,8 +34,8 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    freopen("VAO.INP", stdin, NULL);
-    freopen("RA.OUT", stdout, NULL);
+    freopen("VAO.INP", NULL, stdin);
+    freopen("RA.OUT", NULL, stdout);
     cin >> n >> a >> b;
     for (ll i = 1; i <= n; i++)
         cin >> t[i], gtln = max(gtln, t[i]);
