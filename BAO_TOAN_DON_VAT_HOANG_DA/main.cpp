@@ -33,15 +33,15 @@ bool bfs(ll val)
     return false;
 }
 
-void path()
+void path(ll x)
 {
-    ll x = b;
-    while (x != a)
+    if (x == a)
     {
-        cout << x << ' ';
-        x = trace[x];
+        cout << a << ' ';
+        return;
     }
-    cout << a;
+    path(trace[x]);
+    cout << x << ' ';
 }
 
 int main()
@@ -49,7 +49,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     freopen("VAO.INP", "r", stdin);
-    //freopen("RA.OUT", "w", stdout);
+    freopen("RA.OUT", "w", stdout);
     cin >> n >> a >> b;
     for (ll i = 1; i <= n; i++) {
         cin >> t[i];
@@ -73,6 +73,6 @@ int main()
         else l = m + 1;
     }
     cout << res << '\n';
-    path();
+    path(b);
     return 0;
 }
