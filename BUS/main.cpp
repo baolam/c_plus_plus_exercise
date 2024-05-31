@@ -19,7 +19,7 @@ int main()
     cin.tie(NULL); cout.tie(NULL);
     freopen("VAO.INP", "r", stdin);
     freopen("RA.OUT", "w", stdout);
-    ll k, idx = 1;
+    ll k, cnt = 1;
     cin >> n >> m;
     for (ll i = 1; i <= n; i++)
     {
