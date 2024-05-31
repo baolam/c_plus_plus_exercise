@@ -24,13 +24,16 @@ int main()
     for (ll i = 1; i <= n; i++)
     {
         cin >> t[i] >> k;
-        while(k != 0)
+        for (ll j = 1; j <= k; j++)
         {
             cin >> e[cnt];
-            gtln = max(gtln, e[cnt]);
-            cnt++;
-            k--;
+            cnt++; gtln = max(gtln, e[cnt]);
         }
     }
+    cnt--;
+    sort(e + 1, e + cnt);
+    for (ll i = 1; i <= cnt; i++)
+        cout << e[i] << ' ';
+    cout << '\n';
     return 0;
 }
