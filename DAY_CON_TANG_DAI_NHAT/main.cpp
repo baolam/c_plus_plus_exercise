@@ -21,8 +21,8 @@ int main()
         if (a[i] < a[c[1]])
             c[1] = i;
         else {
-            if (a[i] < a[c[res]])
-                res++; c[res] = i;
+            if (a[i] > a[c[res]])
+                res++, c[res] = i;
             else {
                 ll l = 1, r = res;
                 while (l < r)
