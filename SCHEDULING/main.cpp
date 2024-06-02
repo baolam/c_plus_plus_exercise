@@ -15,6 +15,11 @@ bool compare(II x, II y)
     return x.second <= y.second;
 }
 
+bool intersect(ll a, ll b, ll c, ll d)
+{
+    return max(a, c) < min(b, d);
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -25,7 +30,16 @@ int main()
     for (ll i = 1; i <= n; i++)
         cin >> a[i].first >> a[i].second;
     sort(a + 1, a + 1 + n, compare);
-    for (ll i = 1; i <= n; i++)
-        cout << a[i].first << ',' << a[i].second << '\n';
+    ll res = 1, st = a[1].first, en = a[1].second;
+    for (ll i = 2; i <= n; i++)
+    {
+        if (! intersect(st, en, a[i].first, a[i].second))
+        {
+            res++;
+            st = a[i].first;
+            en = a[i].second;
+        }
+    }
+    cout << res;
     return 0;
 }
