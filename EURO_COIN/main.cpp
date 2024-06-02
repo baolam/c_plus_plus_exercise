@@ -18,10 +18,10 @@ int main()
     ll res = 0, i = 1;
     while (s != 0 && i <= n)
     {
-        if (s > coins[i])
+        if (s >= coins[i])
             s -= coins[i], res++;
         else i++;
     }
-    cout << res;
+    cout << res << ',' << s;
     return 0;
 }
