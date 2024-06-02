@@ -36,6 +36,9 @@ int main()
             }
         }
     }
-    cout << res;
+    for (ll i = 1; i <= res; i++)
+        cout << c[i] << ' ';
+    cout << '\n';
+    //cout << res;
     return 0;
 }
