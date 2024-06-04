@@ -16,6 +16,8 @@ ll solve(ll x)
     ll bst = INF;
     for (ll i = 1; i <= n; i++)
         bst = min(bst, solve(x - coins[i]) + 1);
+    ok[x] = true;
+    mem[x] = bst;
     return bst;
 }
 
