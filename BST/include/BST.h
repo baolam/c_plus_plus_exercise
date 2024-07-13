@@ -18,6 +18,8 @@ class BST
         void PrintInOrderPrivate(node* Ptr);
         node* ReturnNodePrivate(int key, node *Ptr);
         int FindSmallestPrivate(node *Ptr);
+        void RemoveNodePrivate(int key, node *parent);
+
     public:
         BST();
         node* CreateLeaf(int key);
@@ -27,6 +29,7 @@ class BST
         int ReturnRootKey();
         void PrintChildren(int key);
         int FindSmallest();
+        void RemoveNode(int key);
 };
 
 #endif // BST_H

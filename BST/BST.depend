@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1720847070 source:j:\c++\bst\main.cpp
+1720859152 source:j:\c++\bst\main.cpp
 	<bits/stdc++.h>
 	"BST.h"
 
@@ -7,5 +7,5 @@
 	<bits/stdc++.h>
 	"BST.h"
 
-1720857335 j:\c++\bst\include\bst.h
+1720859768 j:\c++\bst\include\bst.h
 
