@@ -79,3 +79,48 @@ void BST::PrintInOrder()
 {
     PrintInOrderPrivate(root);
 }
+
+BST::node* BST::ReturnNodePrivate(int key, node *Ptr)
+{
+    if (Ptr != NULL)
+    {
+        if (Ptr->key == key)
+            return Ptr;
+        if (key < Ptr->key)
+            return ReturnNodePrivate(key, Ptr->left);
+        else return ReturnNodePrivate(key, Ptr->right);
+    }
+    else return NULL;
+}
+
+BST::node* BST::ReturnNode(int key)
+{
+    return ReturnNodePrivate(key, root);
+}
+
+int BST::ReturnRootKey()
+{
+    if (root != NULL)
+        return root->key;
+    else
+        return -1000;
+}
+
+void BST::PrintChildren(int key)
+{
+    node* Ptr = ReturnNode(key);
+    if (Ptr != NULL)
+    {
+        cout << "Parent Node = " << Ptr->key << '\n';
+        Ptr->left == NULL ?
+            cout << "Left Child = NULL\n" :
+            cout << "Left Child = " << Ptr->left->key << '\n';
+        Ptr->right == NULL ?
+            cout << "Right Child = NULL\n" :
+            cout << "Right Child = " << Ptr->right->key << '\n';
+    }
+    else
+    {
+        cout << "Key " << key << " is not in the tree\n";
+    }
+}

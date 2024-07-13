@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1720839473 source:j:\c++\bst\main.cpp
-	<bits/stdc++.h>
-
-1720846852 source:j:\c++\bst\src\bst.cpp
+1720847070 source:j:\c++\bst\main.cpp
 	<bits/stdc++.h>
 	"BST.h"
 
-1720846855 j:\c++\bst\include\bst.h
+1720857285 source:j:\c++\bst\src\bst.cpp
+	<bits/stdc++.h>
+	"BST.h"
+
+1720857335 j:\c++\bst\include\bst.h
 
