@@ -127,7 +127,7 @@ void BST::PrintChildren(int key)
 
 int BST::FindSmallest()
 {
-    FindSmallestPrivate(root);
+    return FindSmallestPrivate(root);
 }
 
 int BST::FindSmallestPrivate(node *Ptr)
@@ -159,13 +159,13 @@ void BST::RemoveNodePrivate(int key, node *parent)
         }
         else
         {
-            if (key < parent->left && parent->left != NULL)
+            if (key < parent->left->key && parent->left != NULL)
             {
                 parent->left->key == key ?
                     RemoveMatch(parent, parent->left, true) :
                     RemoveNodePrivate(key, parent->left);
             }
-            else if (key > parent->right && parent->right != NULL)
+            else if (key > parent->right->key && parent->right != NULL)
             {
                 parent->right->key == key ?
                     RemoveMatch(parent, parent->right, false) :
@@ -228,5 +228,55 @@ void BST::RemoveRootMatch()
     else
     {
         cout << "Can not remove root. The tree is empty\n";
+    }
+}
+
+void BST::RemoveMatch(node *parent, node *match, bool left)
+{
+    if (root != NULL)
+    {
+        node *delPtr;
+        int matchKey = match->key;
+        int smallestInRightSubtree;
+
+        // Case 0 - 0 children
+        if (match->left == NULL && match->right == NULL)
+        {
+            delPtr = match;
+            left == true ? parent->left = NULL :
+                parent->right = NULL;
+            delete delPtr;
+            cout << "The node containing key " << matchKey << " was removed\n";
+        }
+
+        // Case 1 - 1 children
+        else if (match->left == NULL && match->right != NULL)
+        {
+            left == true ? parent->left = match->right : parent->right = match->right;
+            match->right = NULL;
+            delPtr = match;
+            delete delPtr;
+            cout << "The node containing key " << matchKey << " was removed\n";
+        }
+        else if (match->left != NULL && match->right == NULL)
+        {
+            left == true ? parent->left = match->left : parent->right = match->left;
+            match->right = NULL;
+            delPtr = match;
+            delete delPtr;
+            cout << "The node containing key " << matchKey << " was removed\n";
+        }
+
+        // Case 2 - 2 children
+        else
+        {
+            smallestInRightSubtree = FindSmallestPrivate(match->right);
+            RemoveNodePrivate(smallestInRightSubtree, match);
+            match->key = smallestInRightSubtree;
+        }
+    }
+    else
+    {
+        cout << "Can not remove match. The tree is empty\n";
     }
 }

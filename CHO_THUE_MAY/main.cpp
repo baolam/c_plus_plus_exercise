@@ -36,9 +36,9 @@ int main()
         f[i] = m[i].c;
         for (ll j = 1; j < i; j++)
         {
-            if (m[j].b <= m[i].a && f[j] < f[i] + m[i].c)
+            if (m[j].b <= m[i].a && f[i] < f[j] + m[i].c)
             {
-                f[j] = f[i] + m[i].c;
+                f[i] = f[j] + m[i].c;
             }
         }
     }

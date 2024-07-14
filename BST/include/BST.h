@@ -20,6 +20,7 @@ class BST
         int FindSmallestPrivate(node *Ptr);
         void RemoveNodePrivate(int key, node *parent);
         void RemoveRootMatch();
+        void RemoveMatch(node *parent, node *match, bool left);
 
     public:
         BST();
