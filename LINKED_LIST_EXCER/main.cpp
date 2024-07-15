@@ -33,6 +33,32 @@ node* addAtBegining(node *ptr, int data)
     return temp;
 }
 
+int countNodes(node *ptr)
+{
+    int m = 0;
+    while (ptr != NULL)
+    {
+        m++;
+        ptr = ptr->link;
+    }
+    return m;
+}
+
+void addAtPosition(node *ptr, int pos, int data)
+{
+    node *ptr_2 = createNode(data);
+
+    pos--;
+    while (pos != 1)
+    {
+        ptr = ptr->link;
+        pos--;
+    }
+
+    ptr_2->link = ptr->link;
+    ptr->link = ptr_2;
+}
+
 void PrintLinkedList()
 {
     node *ptr = head;
@@ -64,6 +90,7 @@ int main()
             ptr = addAtEnd(ptr, x);
     }
     head = addAtBegining(head, 234);
+    addAtPosition(head, 3, 79);
     PrintLinkedList();
     return 0;
 }
