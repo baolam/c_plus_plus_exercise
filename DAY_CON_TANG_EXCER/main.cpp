@@ -18,6 +18,32 @@ int main()
     cin >> n;
     for (ll i = 1; i <= n; i++)
         cin >> a[i];
-
+    cs[1] = 1;
+    ll k = 1;
+    for (ll i = 2; i <= n; i++)
+    {
+        if (a[i] < a[cs[1]])
+            cs[1] = i;
+        else
+        {
+            if (a[i] > a[cs[k]])
+            {
+                k++;
+                cs[k] = i;
+            }
+            else {
+                ll l = 1, r = k;
+                while (l < r)
+                {
+                    ll m = l + (r - l) / 2;
+                    if (a[i] > a[cs[m]])
+                        l = m + 1;
+                    else r = m;
+                }
+                cs[l] = i;
+            }
+        }
+    }
+    cout << k;
     return 0;
 }
