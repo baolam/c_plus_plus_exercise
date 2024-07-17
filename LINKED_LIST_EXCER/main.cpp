@@ -80,14 +80,9 @@ node *deleteFirstNode(node *ptr)
 void deleteLastNode(node *ptr)
 {
     node *temp = ptr;
-    node *temp2 = ptr;
-    while (temp->link != NULL)
-    {
-        temp2 = temp;
+    while (temp->link->link != NULL)
         temp = temp->link;
-    }
-    temp2->link = NULL;
-    temp = NULL;
+    temp->link = NULL;
 }
 
 int main()
