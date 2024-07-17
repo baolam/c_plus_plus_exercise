@@ -85,6 +85,20 @@ void deleteLastNode(node *ptr)
     temp->link = NULL;
 }
 
+void deleteAtPosition(node *ptr, int pos)
+{
+    node *current = ptr;
+    node *prev = ptr;
+    while (pos != 1)
+    {
+        prev = current;
+        current = current->link;
+        pos--;
+    }
+    prev->link = current->link;
+    current = NULL;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -105,12 +119,8 @@ int main()
         else
             ptr = addAtEnd(ptr, x);
     }
-    //head = addAtBegining(head, 234);
-    //addAtPosition(head, 3, 79);
     PrintLinkedList();
-    head = deleteFirstNode(head);
-    PrintLinkedList();
-    deleteLastNode(head);
+    deleteAtPosition(head,2);
     PrintLinkedList();
     return 0;
 }
