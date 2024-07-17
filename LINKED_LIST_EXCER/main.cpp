@@ -67,6 +67,14 @@ void PrintLinkedList()
         cout << ptr->data << ' ';
         ptr = ptr->link;
     }
+    cout << '\n';
+}
+
+node *deleteFirstNode(node *ptr)
+{
+    node *temp = ptr->link;
+    ptr = NULL;
+    return temp;
 }
 
 int main()
@@ -91,6 +99,8 @@ int main()
     }
     head = addAtBegining(head, 234);
     addAtPosition(head, 3, 79);
+    PrintLinkedList();
+    head = deleteFirstNode(head);
     PrintLinkedList();
     return 0;
 }
