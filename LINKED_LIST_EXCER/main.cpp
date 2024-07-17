@@ -99,6 +99,32 @@ void deleteAtPosition(node *ptr, int pos)
     current = NULL;
 }
 
+node* deleteEntire(node *ptr)
+{
+    node *temp = ptr;
+    while (temp != NULL)
+    {
+        temp = temp->link;
+        ptr = temp;
+    }
+    return ptr;
+}
+
+node* reverseLinkedList(node *head)
+{
+    node *prev = NULL;
+    node *next = NULL;
+    while (head != NULL)
+    {
+        next = head->link;
+        head->link = prev;
+        prev = head;
+        head = next;
+    }
+    head = prev;
+    return head;
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -120,7 +146,7 @@ int main()
             ptr = addAtEnd(ptr, x);
     }
     PrintLinkedList();
-    deleteAtPosition(head,2);
+    head = reverseLinkedList(head);
     PrintLinkedList();
     return 0;
 }
