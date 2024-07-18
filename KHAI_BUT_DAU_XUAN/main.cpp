@@ -12,31 +12,24 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
+    freopen("VAO.INP", "r", stdin);
     cin >> n >> L >> U;
     for (ll i = 1; i <= n; i++)
         cin >> a[i];
-    ll ans = 0, l = 1, r = 1;
-    //a[0] = INT_MAX;
-    while (l <= r && r <= n)
+    ll ans = 0;
+    for (ll l = 1, r = 1; r <= n; r++)
     {
         if (hm[a[r]] == 0)
             distinct++;
-        if (distinct < L)
-        {
-            hm[a[r]]++;
-            r++;
-        }
-        if (distinct > U)
+        hm[a[r]]++;
+        if (L <= distinct && distinct <= U)
+            ans++;
+        while (distinct >= L)
         {
             if (hm[a[l]] == 1)
                 distinct--;
             hm[a[l]]--;
-            l++;
-        }
-        if (L <= distinct && distinct <= U)
-        {
-            ans++;
-            r++;
+            l++; ans++;
         }
     }
     cout << ans;
