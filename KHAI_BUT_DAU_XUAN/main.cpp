@@ -4,9 +4,15 @@
 using namespace std;
 typedef int ll;
 
-unordered_map<ll, ll> hm;
-ll n, L, U, distinct = 0;
+ll n, L, U;
 ll a[maxn];
+
+void build_for_X(ll X)
+{
+    unordered_map<ll, ll> hm;
+    ll distinct = 0;
+
+}
 
 int main()
 {
@@ -16,22 +22,5 @@ int main()
     cin >> n >> L >> U;
     for (ll i = 1; i <= n; i++)
         cin >> a[i];
-    ll ans = 0;
-    for (ll l = 1, r = 1; r <= n; r++)
-    {
-        if (hm[a[r]] == 0)
-            distinct++;
-        hm[a[r]]++;
-        if (L <= distinct && distinct <= U)
-            ans++;
-        while (distinct >= L)
-        {
-            if (hm[a[l]] == 1)
-                distinct--;
-            hm[a[l]]--;
-            l++; ans++;
-        }
-    }
-    cout << ans;
     return 0;
 }
