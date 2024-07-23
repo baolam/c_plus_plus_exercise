@@ -59,7 +59,7 @@ int main()
         }
         else if (is_operator(s[i]))
         {
-            while (! op.empty() && get_prior(s[i]) >= get_prior(op.top()))
+            while (! op.empty() && get_prior(s[i]) <= get_prior(op.top()))
             {
                 process_op(op.top());
                 op.pop();
