@@ -35,7 +35,7 @@ int main()
     {
         vector<pair<pair<int, int>, int>> a(n);
         for (int i = 0; i < n; i++)
-            a[i] = { c[i], c[(i + (1 << k)) % n] };
+            a[i] = { { c[i], c[(i + (1 << k)) % n] }, i };
         sort(a.begin(), a.end());
         for (int i = 0; i < n; i++)
             p[i] = a[i].second;
