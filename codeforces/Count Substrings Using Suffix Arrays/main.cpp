@@ -65,12 +65,13 @@ int leftest()
     {
         int m = l + (r - l) / 2;
         int code = matching(m);
-        if ((m == 0 || matching(m - 1) == -1) && code == 0) // p < S --> S > p
+        // S[m - 1] < p
+        if ((m == 0 || matching(m - 1) == 1) && code == 0)
             return m;
-        if (code == -1) l = m + 1;
+        if (code == 1) l = m + 1;
         else r = m - 1;
     }
-    return -1;
+    return 0;
 }
 
 int rightest()
@@ -80,18 +81,13 @@ int rightest()
     {
         int m = l + (r - l) / 2;
         int code = matching(m);
-        if ((m == N - 1 || matching(m + 1) == 1) && code == 0) // p > S --> S < p
+        // p < S[m + 1]
+        if ((m == N - 1 || matching(m + 1) == -1) && code == 0)
             return m;
-        if (code == -1) l = m + 1;
-        else r = m - 1;
+        if (code == -1) r = m - 1;
+        else l = m + 1;
     }
     return -1;
-}
-
-void solve()
-{
-    cin >> p;
-    cout << rightest() - leftest() + 1 << '\n';
 }
 
 int main()
@@ -103,7 +99,8 @@ int main()
     cin >> t;
     while (t)
     {
-        solve();
+        cin >> p;
+        cout << rightest() - leftest() + 1 << '\n';
         t--;
     }
     return 0;
