@@ -67,7 +67,7 @@ int leftest()
         int code = matching(m);
         if ((m == 0 || matching(m - 1) == 1) && code == 0)
             return m;
-        if (code == -1) l = m + 1;
+        if (code == 1) l = m + 1;
         else r = m - 1;
     }
     return -1;
@@ -82,7 +82,7 @@ int rightest()
         int code = matching(m);
         if ((m == N - 1 || matching(m + 1) == -1) && code == 0)
             return m;
-        if (code == -1) l = m + 1;
+        if (code == 1) l = m + 1;
         else r = m - 1;
     }
     return 0;
@@ -93,12 +93,16 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cin >> S;
+    S += '#';
     buildSA();
     cin >> t;
     while (t)
     {
         cin >> p;
-        cout << leftest() << ' ' << rightest() << '\n';
+        int l = leftest(), r = rightest();
+        if (l == -1 || r == 0)
+            cout << 0 << '\n';
+        else cout << r - l + 1 << '\n';
         t--;
     }
     return 0;
