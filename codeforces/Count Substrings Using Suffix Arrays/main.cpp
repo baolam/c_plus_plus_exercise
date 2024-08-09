@@ -50,9 +50,9 @@ int matching(int m)
 {
     for (int i = 0; i < p.size(); i++)
     {
-        if (p[i] < S[(m + i) % N]) // p < S
+        if (p[i] < S[(sa[m] + i) % N]) // p < S
             return -1;
-        if (p[i] > S[(m + i) % N]) // p > S
+        if (p[i] > S[(sa[m] + i) % N]) // p > S
             return 1;
     }
     return 0;
@@ -65,13 +65,12 @@ int leftest()
     {
         int m = l + (r - l) / 2;
         int code = matching(m);
-        // S[m - 1] < p
         if ((m == 0 || matching(m - 1) == 1) && code == 0)
             return m;
-        if (code == 1) l = m + 1;
+        if (code == -1) l = m + 1;
         else r = m - 1;
     }
-    return 0;
+    return -1;
 }
 
 int rightest()
@@ -81,13 +80,12 @@ int rightest()
     {
         int m = l + (r - l) / 2;
         int code = matching(m);
-        // p < S[m + 1]
         if ((m == N - 1 || matching(m + 1) == -1) && code == 0)
             return m;
-        if (code == -1) r = m - 1;
-        else l = m + 1;
+        if (code == -1) l = m + 1;
+        else r = m - 1;
     }
-    return -1;
+    return 0;
 }
 
 int main()
@@ -100,7 +98,7 @@ int main()
     while (t)
     {
         cin >> p;
-        cout << rightest() - leftest() + 1 << '\n';
+        cout << leftest() << ' ' << rightest() << '\n';
         t--;
     }
     return 0;
