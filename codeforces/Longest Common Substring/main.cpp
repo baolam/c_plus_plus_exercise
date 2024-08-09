@@ -68,15 +68,13 @@ int main()
     S = s + '#' + p;
     buildSA();
     buildLCP();
-    showDetailSuffix();
-    /*
+    //showDetailSuffix();
     int ans = 0, st = 0;
-    for (int i = 1; i < N; i++)
+    for (int i = 2; i < N; i++)
     {
-        if (belongTo(sa[i]) != belongTo(sa[i - 1]) && ans < lcp[i])
-            ans = lcp[i], st = sa[i];
+        if (belongTo(sa[i]) != belongTo(sa[i - 1]) && ans < lcp[i - 1])
+            ans = lcp[i - 1], st = sa[i - 1];
     }
     cout << S.substr(st, ans);
-    */
     return 0;
 }
