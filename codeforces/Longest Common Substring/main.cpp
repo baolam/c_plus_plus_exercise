@@ -48,22 +48,15 @@ void buildLCP()
     }
 }
 
-void showSA_LCP()
-{
-    for (int i = 0; i < N; i++)
-        cout << sa[i] << ' ';
-    cout << '\n';
-    for (int i = 0; i < N; i++)
-        cout << belongTo(sa[i]) << ' ';
-    cout << '\n';
-    for (int i = 0; i < N - 1; i++)
-        cout << lcp[i] << ' ';
-    cout << '\n';
-}
-
 int belongTo(int x)
 {
     return 0 <= x && x < n ? 1 : 2;
+}
+
+void showDetailSuffix()
+{
+    for (int i = 0; i < N; i++)
+        cout << lcp[i] << ' ' << belongTo(sa[i]) << ' ' << S.substr(sa[i], N) << '\n';
 }
 
 int main()
@@ -75,7 +68,7 @@ int main()
     S = s + '#' + p;
     buildSA();
     buildLCP();
-    showSA_LCP();
+    showDetailSuffix();
     /*
     int ans = 0, st = 0;
     for (int i = 1; i < N; i++)
