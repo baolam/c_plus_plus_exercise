@@ -4,7 +4,8 @@ using namespace std;
 typedef long long ll;
 
 const int MAXN = 1e5 + 1;
-int a[MAXN], segment_tree[4 * MAXN];
+ll segment_tree[4 * MAXN];
+int a[MAXN];
 int n;
 
 void build(int id, int l, int r)
@@ -37,7 +38,7 @@ void update(int i, int v, int id, int l, int r)
 ll sum(int u, int v, int id, int l, int r)
 {
     if (u > r || v < l) return 0;
-    if (u >= l && v <= r) return segment_tree[id];
+    if (u <= l && r <= v) return segment_tree[id];
     int m = (l + r) / 2;
     ll s1 = sum(u, v, 2 * id, l, m);
     ll s2 = sum(u, v, 2 * id + 1, m + 1, r);
@@ -48,7 +49,7 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    freopen("VAO.INP", "r", stdin);
+    //freopen("VAO.INP", "r", stdin);
     int m;
     cin >> n >> m;
     for (int i = 1; i <= n; i++)
