@@ -4,8 +4,10 @@ using namespace std;
 typedef long long ll;
 
 const int MAXN = 1e5 + 1;
+const int INF = INT_MAX;
+
 int a[MAXN], st[4 * MAXN];
-int n, m;
+int n;
 
 void build(int id, int l, int r)
 {
@@ -36,16 +38,17 @@ void update(int i, int v, int id, int l, int r)
 
 int query(int u, int v, int id, int l, int r)
 {
-    if (u > r || v < l) return 1e9 + 1;
+    if (u > r || v < l) return INF;
     if (u <= l && r <= v) return st[id];
     int mid = (l + r) / 2;
-    int m1 = query(u, v, 2 * id, 1, mid);
+    int m1 = query(u, v, 2 * id, l, mid);
     int m2 = query(u, v, 2 * id + 1, mid + 1, r);
     return min(m1, m2);
 }
 
 int main()
 {
+    int m;
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cin >> n >> m;
