@@ -5,6 +5,7 @@ typedef long long ll;
 
 const int MAXN = 1e5 + 1;
 ll segment_tree[4 * MAXN];
+
 int a[MAXN];
 int n;
 
