@@ -48,19 +48,18 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
+    freopen("VAO.INP", "r", stdin);
     int m;
     cin >> n >> m;
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
         cin >> a[i];
     build(1, 1, n);
-    while (m)
+    int op, x1, x2;
+    for (int i = 1; i <= m; i++)
     {
-        int op, x1, x2;
         cin >> op >> x1 >> x2;
-        if (op == 1)
-            update(x1 + 1, x2, 1, 1, n);
-        else cout << sum(x1 + 1, x2 + 1, 1, 1, n) << '\n';
-        m--;
+        if (op == 1) update(x1 + 1, x2, 1, 1, n);
+        else cout << sum(x1 + 1, x2, 1, 1, n) << '\n';
     }
     return 0;
 }
