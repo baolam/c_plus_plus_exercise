@@ -13,22 +13,31 @@ struct SegmentTreeInfo
 {
     int _min = INF;
     int _equal = 1;
+
+    bool operator<(SegmentTreeInfo other)
+    {
+        return _min < other._min;
+    }
+
+    bool operator>(SegmentTreeInfo other)
+    {
+        return _min > other._min;
+    }
+
+    bool operator==(SegmentTreeInfo other)
+    {
+        return _min == other._min;
+    }
 };
 
 SegmentTreeInfo _default;
 SegmentTreeInfo st[4 * MAXN];
 void _update_condition(int id)
 {
-    if (st[2 * id]._min < st[2 * id + 1]._min)
-    {
-        st[id]._min = st[2 * id]._min;
-        st[id]._equal = st[2 * id]._equal;
-    }
-    else if (st[2 * id]._min > st[2 * id + 1]._min)
-    {
-        st[id]._min = st[2 * id + 1]._min;
-        st[id]._equal = st[2 * id + 1]._equal;
-    }
+    if (st[2 * id] < st[2 * id + 1])
+        st[id] = st[2 * id];
+    else if (st[2 * id] > st[2 * id + 1])
+        st[id] = st[2 * id + 1];
     else
     {
         st[id]._min = st[2 * id]._min;
@@ -73,16 +82,10 @@ SegmentTreeInfo query(int u, int v, int id, int l, int r)
     SegmentTreeInfo q1 = query(u, v, 2 * id, l, mid);
     SegmentTreeInfo q2 = query(u, v, 2 * id + 1, mid + 1, r);
     SegmentTreeInfo out;
-    if (q1._min < q2._min)
-    {
-        out._min = q1._min;
-        out._equal = q1._equal;
-    }
-    else if (q1._min > q2._min)
-    {
-        out._min = q2._min;
-        out._equal = q2._equal;
-    }
+    if (q1 < q2)
+        out = q1;
+    else if (q1 > q2)
+        out = q2;
     else
     {
         out._min = q1._min;
