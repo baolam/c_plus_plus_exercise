@@ -60,13 +60,15 @@ int query(int k, int id)
         return st[id].idx;
     if (k < st[id].sum)
         return query(k, 2 * id);
-    else return query(k - st[2 * id].sum, 2 * id + 1);
+    return query(k - st[id].sum, 2 * id + 1);
 };
 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
+    freopen("VAO.INP", "r", stdin);
+    //freopen("RA.OUT", "w", stdout);
     cin >> n >> m;
     for (int i = 1; i <= n; i++)
         cin >> a[i];
