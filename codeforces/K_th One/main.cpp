@@ -26,12 +26,11 @@ void update(int i, int id, int l, int r)
     if (l == r)
     {
         st[id] = st[id] == 1 ? 0 : 1;
-        cout << "Update " << i << ' ' << st[id] << '\n';
         return;
     }
     int mid = (l + r) / 2;
     update(i, 2 * id, l, mid);
-    update(i, 2 * id, mid + 1, r);
+    update(i, 2 * id + 1, mid + 1, r);
     st[id] = st[2 * id] + st[2 * id + 1];
 }
 
@@ -58,7 +57,7 @@ int main()
     {
         cin >> op >> x1;
         if (op == 1) update(x1 + 1, 1, 1, n);
-        else cout << query(x1 + 1, 1, 1, n) << '\n';
+        else cout << query(x1 + 1, 1, 1, n) - 1 << '\n';
         m--;
     }
     return 0;
