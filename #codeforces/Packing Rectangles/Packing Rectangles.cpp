@@ -5,28 +5,28 @@ typedef long long ll;
 
 int w, h, n;
 
-bool f(int x)
+bool f(ll x)
 {
-    int tmpw = x / w;
-    int tmph = x / h;
+    ll tmpw = x / w;
+    ll tmph = x / h;
     return tmpw * tmph >= n;
 }
 
-int searchR()
+ll searchR()
 {
-    int r = 1;
+    ll r = 1;
     while (!f(r))
         r *= 2;
     return r;
 }
 
-int bSearch()
+ll bSearch()
 {
-    int l = 1;
-    int r = searchR();
+    ll l = 1;
+    ll r = searchR();
     while (l < r - 1)
     {
-        int m = (l + r) / 2;
+        ll m = (l + r) / 2;
         if (!f(m))
             l = m;
         else
