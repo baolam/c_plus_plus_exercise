@@ -2,7 +2,7 @@ import os
 
 # EXCLUDE = ["codeforces", "vnoi", "LMH_Giai_Thuat_Lap_Trinh", ".git", ".vscode", "tools"]
 EXCLUDE = []
-PATH = "E:/Excercise/C++/codeforces"
+PATH = "E:/Excercise/C++/vnoi"
 
 folders = os.listdir(PATH)
 for folder in folders:
@@ -11,5 +11,5 @@ for folder in folders:
     cpp_file = tmp + '.cpp'
     out_file = tmp + '.exe'
     command = "g++ " + cpp_file + ' -o ' + out_file
-    print ("Execute " + folder)
+    print ("Execute " + command)
     os.system(command)
