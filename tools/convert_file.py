@@ -1,8 +1,7 @@
 import os
 import shutil
 
-PATH = "E:/Excercise/C++/vnoi"
-CREATE_FOLDER = False
+PATH = "E:/Excercise/C++/LMH_Giai_Thuat_Lap_Trinh"
 
 objs = os.listdir(PATH)
 for obj in objs:
@@ -12,5 +11,4 @@ for obj in objs:
     folder_name = PATH + '/' + name
     if not os.path.exists(folder_name):
       os.makedirs(folder_name)
-    if not CREATE_FOLDER:
       shutil.move(content, folder_name + '/' + obj)
