@@ -10,6 +10,10 @@
 using namespace std;
 typedef long long ll;
 
+const int MAXN = 101;
+int n;
+char x[MAXN];
+
 int main()
 {
   ios_base::sync_with_stdio(false);
@@ -19,5 +23,6 @@ int main()
   freopen(READ, "r", stdin);
   freopen(WRITE, "w", stdout);
 #endif
+  cin >> n;
   return 0;
 }

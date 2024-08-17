@@ -12,30 +12,14 @@ typedef long long ll;
 
 const int MAXN = 1e4 + 1;
 int n, k;
-double gtln = INT_MIN;
-double a[MAXN];
+int a[MAXN];
 
-bool f(double x)
+bool good(double x)
 {
   int cnt = 0;
   for (int i = 1; i <= n; i++)
-    cnt += (int)(a[i] / x);
+    cnt += floor(a[i] / x);
   return cnt >= k;
-}
-
-double bSearch()
-{
-  double l = 0.0f;
-  double r = gtln;
-  for (int i = 1; i <= 100; i++)
-  {
-    double x = 0.5f * (l + r);
-    if (f(x))
-      l = x;
-    else
-      r = x;
-  }
-  return r;
 }
 
 int main()
@@ -49,10 +33,17 @@ int main()
 #endif
   cin >> n >> k;
   for (int i = 1; i <= n; i++)
-  {
     cin >> a[i];
-    gtln = max(gtln, a[i]);
+  double l = 0;
+  double r = 1e8;
+  for (int t = 1; t <= 70; t++)
+  {
+    double m = (l + r) / 2;
+    if (good(m))
+      l = m;
+    else
+      r = m;
   }
-  cout << bSearch() << '\n';
+  cout << setprecision(20) << l;
   return 0;
 }

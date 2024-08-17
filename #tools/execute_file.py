@@ -10,6 +10,6 @@ for folder in folders:
     tmp = PATH + '/' + folder + '/' + folder
     cpp_file = tmp + '.cpp'
     out_file = tmp + '.exe'
-    command = "g++ " + cpp_file + ' -o ' + out_file
+    command = "g++ " + '"' + cpp_file + '"' + ' -o ' + '"' + out_file + '"'
     print ("Execute " + command)
     os.system(command)
