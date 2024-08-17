@@ -17,7 +17,7 @@ bool good(int t)
   int t1 = t / x;
   int t2 = t / y;
   // Do phải sao chép 1 bản đầu tiên rùi mới in tiếp (- min (x, y))
-  return t1 + t2 - min(x, y) >= n;
+  return t1 + t2 - min(x, y) >= n - 1;
 }
 
 int main()
@@ -30,8 +30,8 @@ int main()
   freopen(WRITE, "w", stdout);
 #endif
   cin >> n >> x >> y;
-  int l = min(x, y);
-  int r = max(n * x, n * y);
+  int l = 0;
+  int r = max(x, y) * n;
   // Properties of good(m) function
   // 0 0 0 0 0 0 1 1 1 1 1
   // l for 0, r for 1
