@@ -10,14 +10,17 @@
 using namespace std;
 typedef long long ll;
 
-int n, x, y;
+ll n, x, y;
 
-bool good(int t)
+bool good(ll t)
 {
-  int t1 = t / x;
-  int t2 = t / y;
+  if (t < min(x, y))
+    return false;
   // Do phải sao chép 1 bản đầu tiên rùi mới in tiếp (- min (x, y))
-  return t1 + t2 - min(x, y) >= n - 1;
+  t -= min(x, y);
+  ll n1 = t / x;
+  ll n2 = t / y;
+  return n1 + n2 >= n - 1;
 }
 
 int main()
@@ -30,14 +33,14 @@ int main()
   freopen(WRITE, "w", stdout);
 #endif
   cin >> n >> x >> y;
-  int l = 0;
-  int r = max(x, y) * n;
+  ll l = 0;
+  ll r = max(x, y) * n;
   // Properties of good(m) function
   // 0 0 0 0 0 0 1 1 1 1 1
   // l for 0, r for 1
   while (l < r - 1)
   {
-    int m = (l + r) / 2;
+    ll m = (l + r) / 2;
     if (good(m))
       r = m;
     else
