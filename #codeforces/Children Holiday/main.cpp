@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define HAS_FILE
+// #define HAS_FILE
 
 #ifdef HAS_FILE
 #define FILE_NAME "CH"
@@ -21,10 +21,10 @@ struct Node
 };
 
 int m, n;
-int f[MAXN];
+int f[MAXN], best[MAXN];
 Node a[MAXN];
 
-ll time(ll x, ll i)
+ll time(ll x, int i)
 {
   // x là số bóng bay, trợ lí i
   // thời gian bơm x quả bóng bởi trợ lí i
@@ -37,8 +37,6 @@ ll time(ll x, ll i)
 
 bool good(ll t)
 {
-  memset(f, 0, sizeof(f));
-
   // t là thời gian cần kiểm tra
   ll cnt = 0;
   for (int i = 1; i <= n; i++)
@@ -46,8 +44,7 @@ bool good(ll t)
     // Cần tìm kiếm số bóng bay thổi bởi trợ lí dựa vào thời gian t
     // max x : time(x) <= t thuộc về l
     // time(l) <= t, time(r) > t
-    int tmp = 0;
-    int l = 0, r = m;
+    int l = 0, r = m + 1;
     while (l < r - 1)
     {
       ll mid = (l + r) / 2;
@@ -58,10 +55,8 @@ bool good(ll t)
     }
     cnt += l;
     f[i] = l;
-    if (cnt >= m)
-      return true;
   }
-  return false;
+  return cnt >= m;
 }
 
 int main()
@@ -82,16 +77,21 @@ int main()
   }
   // Tính tăng trong thời gian
   // Hàm good(t) có dạng 0 0 0 0 1 1 1 1
+  // Độ phức tạp O(log2(maxT) * n * log2(m))
   while (l < r - 1)
   {
     ll m = (l + r) / 2;
     if (good(m))
+    {
       r = m;
+      for (int i = 1; i <= n; i++)
+        best[i] = f[i];
+    }
     else
       l = m;
   }
   cout << r << '\n';
   for (int i = 1; i <= n; i++)
-    cout << f[i] << ' ';
+    cout << best[i] << ' ';
   return 0;
 }
