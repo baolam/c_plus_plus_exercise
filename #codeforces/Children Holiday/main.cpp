@@ -35,7 +35,7 @@ bool compare(Node x1, Node x2)
 ll time(ll x, ll i)
 {
   Node tmp = a[i];
-  ll delta = x % tmp.z == = 0 ? -tmp.y : 0;
+  ll delta = x % tmp.z == 0 ? -tmp.y : 0;
   ll relax = x / tmp.z;
   relax *= tmp.y;
   return x * tmp.t + relax + delta;
