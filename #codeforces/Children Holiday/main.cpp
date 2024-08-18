@@ -21,19 +21,13 @@ struct Node
 };
 
 int m, n;
+int f[MAXN];
 Node a[MAXN];
-
-bool compare(Node x1, Node x2)
-{
-  if (x1.t == x2.t && x1.z == x2.z)
-    return x1.y <= x2.y;
-  if (x1.t == x2.t)
-    return x1.z < x2.z;
-  return x1.t < x2.t;
-}
 
 ll time(ll x, ll i)
 {
+  // x là số bóng bay, trợ lí i
+  // thời gian bơm x quả bóng bởi trợ lí i
   Node tmp = a[i];
   ll delta = x % tmp.z == 0 ? -tmp.y : 0;
   ll relax = x / tmp.z;
@@ -41,11 +35,33 @@ ll time(ll x, ll i)
   return x * tmp.t + relax + delta;
 }
 
-void show_sort()
+bool good(ll t)
 {
+  memset(f, 0, sizeof(f));
+
+  // t là thời gian cần kiểm tra
+  ll cnt = 0;
   for (int i = 1; i <= n; i++)
-    cout << a[i].t << ' ' << a[i].z << ' ' << a[i].y << '\n';
-  cout << '\n';
+  {
+    // Cần tìm kiếm số bóng bay thổi bởi trợ lí dựa vào thời gian t
+    // max x : time(x) <= t thuộc về l
+    // time(l) <= t, time(r) > t
+    int tmp = 0;
+    int l = 0, r = m;
+    while (l < r - 1)
+    {
+      ll mid = (l + r) / 2;
+      if (time(mid, i) <= t)
+        l = mid;
+      else
+        r = mid;
+    }
+    cnt += l;
+    f[i] = l;
+    if (cnt >= m)
+      return true;
+  }
+  return false;
 }
 
 int main()
@@ -58,15 +74,24 @@ int main()
   freopen(WRITE, "w", stdout);
 #endif
   cin >> m >> n;
-  for (int i = 1; i <= n; i++)
-    cin >> a[i].t >> a[i].z >> a[i].y;
-  sort(a + 1, a + 1 + n, compare);
-  show_sort();
+  ll l = 0, r = 0;
   for (int i = 1; i <= n; i++)
   {
-    for (int x = 1; x <= m; x++)
-      cout << time(x, i) << ' ';
-    cout << '\n';
+    cin >> a[i].t >> a[i].z >> a[i].y;
+    r = max(r, time(m, i));
   }
+  // Tính tăng trong thời gian
+  // Hàm good(t) có dạng 0 0 0 0 1 1 1 1
+  while (l < r - 1)
+  {
+    ll m = (l + r) / 2;
+    if (good(m))
+      r = m;
+    else
+      l = m;
+  }
+  cout << r << '\n';
+  for (int i = 1; i <= n; i++)
+    cout << f[i] << ' ';
   return 0;
 }
