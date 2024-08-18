@@ -62,5 +62,11 @@ int main()
     cin >> a[i].t >> a[i].z >> a[i].y;
   sort(a + 1, a + 1 + n, compare);
   show_sort();
+  for (int i = 1; i <= n; i++)
+  {
+    for (int x = 1; x <= m; x++)
+      cout << time(x, i) << ' ';
+    cout << '\n';
+  }
   return 0;
 }
