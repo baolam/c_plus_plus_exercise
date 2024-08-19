@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#define int long long
 // #define HAS_FILE
 
 #ifdef HAS_FILE
@@ -8,10 +9,9 @@
 #endif
 
 using namespace std;
-typedef long long ll;
 
+const int MAXM = 15001;
 const int MAXN = 1001;
-const int MAXM = 150001;
 
 struct Node
 {
@@ -20,46 +20,75 @@ struct Node
   int y = 0;
 };
 
-int m, n;
-int f[MAXN], best[MAXN];
+int m,
+    n;
+int best[MAXN];
 Node a[MAXN];
 
-ll time(ll x, int i)
+bool isPossibleBalloons(int balloons, int i, int time)
 {
-  // x là số bóng bay, trợ lí i
-  // thời gian bơm x quả bóng bởi trợ lí i
-  Node tmp = a[i];
-  ll delta = x % tmp.z == 0 ? -tmp.y : 0;
-  ll relax = x / tmp.z;
-  relax *= tmp.y;
-  return x * tmp.t + relax + delta;
+  // Phần thủ tục tính số thời gian thổi balloons quả bóng
+  int t = a[i].t;
+  int z = a[i].z;
+  int y = a[i].y;
+  int batchTime = t * z + y;
+  int batches = balloons / z;
+  bool ok = (balloons % z == 0) ? 1 : 0;
+
+  int curTime = 0;
+  if (ok)
+  {
+    batches--;
+    curTime = batchTime * batches + z * t;
+  }
+  else
+    curTime = batchTime * batches + (balloons % z) * t;
+
+  // Phần kiểm tra điều kiện
+  return curTime <= time;
 }
 
-bool good(ll t)
+bool isPossible(int time)
 {
-  // t là thời gian cần kiểm tra
-  ll cnt = 0;
+  int total = 0;
   for (int i = 1; i <= n; i++)
   {
-    // Cần tìm kiếm số bóng bay thổi bởi trợ lí dựa vào thời gian t
-    // max x : time(x) <= t thuộc về l
-    // time(l) <= t, time(r) > t
-    int l = 0, r = m + 1;
-    while (l < r - 1)
+    int lo = 0, ro = 1e9;
+    while (lo < ro - 1)
     {
-      ll mid = (l + r) / 2;
-      if (time(mid, i) <= t)
-        l = mid;
+      int balloons = (lo + ro) / 2;
+      // 1 1 1 1 0 0 0
+      if (isPossibleBalloons(balloons, i, time))
+        lo = balloons;
       else
-        r = mid;
+        ro = balloons;
     }
-    cnt += l;
-    f[i] = l;
+    // lo : số quả bóng tối đa thổi bởi trợ lý i trong thời gian time
+    total += lo;
   }
-  return cnt >= m;
+  return total >= m;
 }
 
-int main()
+int maxCountBalloons(int i, int time)
+{
+  int t = a[i].t;
+  int z = a[i].z;
+  int y = a[i].y;
+  int batchTime = t * z + y;
+  int batchCount = time / batchTime;
+  int remTime = time % batchTime;
+  int total = batchCount * z;
+  if (remTime)
+  {
+    if (remTime / t >= z)
+      total += z;
+    else
+      total += remTime / t;
+  }
+  return total;
+}
+
+int32_t main()
 {
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
@@ -69,29 +98,38 @@ int main()
   freopen(WRITE, "w", stdout);
 #endif
   cin >> m >> n;
-  ll l = 0, r = 0;
+  for (int i = 1; i <= n; i++)
+    cin >> a[i].t >> a[i].z >> a[i].y;
+  int timeL = -1, timeR = 1e9;
+  while (timeL < timeR - 1)
+  {
+    int timeM = (timeL + timeR) / 2;
+    if (isPossible(timeM))
+      timeR = timeM;
+    else
+      timeL = timeM;
+  }
+  cout << timeR << '\n';
+  int total = 0;
+  for (int i = 1; i <= n; i++)
+    best[i] = maxCountBalloons(i, timeR);
   for (int i = 1; i <= n; i++)
   {
-    cin >> a[i].t >> a[i].z >> a[i].y;
-    r = max(r, time(m, i));
-  }
-  // Tính tăng trong thời gian
-  // Hàm good(t) có dạng 0 0 0 0 1 1 1 1
-  // Độ phức tạp O(log2(maxT) * n * log2(m))
-  while (l < r - 1)
-  {
-    ll m = (l + r) / 2;
-    if (good(m))
+    if (total + best[i] <= m)
     {
-      r = m;
-      for (int i = 1; i <= n; i++)
-        best[i] = f[i];
+      cout << best[i] << ' ';
+      total += best[i];
     }
     else
-      l = m;
+    {
+      if (total == m)
+        cout << 0 << ' ';
+      else
+      {
+        cout << m - total << ' ';
+        total = m;
+      }
+    }
   }
-  cout << r << '\n';
-  for (int i = 1; i <= n; i++)
-    cout << best[i] << ' ';
   return 0;
 }
