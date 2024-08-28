@@ -13,32 +13,25 @@ int a[MAXN];
 
 int left_most(int x)
 {
-  /// min i: Phần tử đầu tiên lớn hơn x, a[i] > x
-  /// a[l] <= x --> belong to l
-  /// a[r] > x --> belong to r
-  int l = 0, r = n + 1;
-  while (l < r - 1)
-  {
-    int m = (l + r) / 2;
-    if (a[m] > x)
-      r = m;
-    else
-      l = m;
-  }
-  return l;
+  /// max j : a[j] <= x
+  int j = 1;
+  while (a[j] <= x)
+    j++;
+  return j - 1;
 }
 
-bool good(int distance)
+bool check(int distance)
 {
   int cows = 1;
-  for (int l = 1; l <= n; l++)
+  for (int i = 1; i <= n; i++)
   {
-    int r = left_most(a[l] + distance);
-    if (l == r)
+    int j = i + 1;
+    while (j <= n && a[j] < a[i] + distance)
+      j++;
+    if (j == n + 1)
       break;
-    cout << l << ' ' << r << ' ' << a[l] + distance << '\n';
     cows++;
-    l = r - 1;
+    i = j - 1;
   }
   return cows >= k;
 }
@@ -48,25 +41,25 @@ int main()
   cin.tie(NULL);
   cout.tie(NULL);
   ios_base::sync_with_stdio(false);
-  freopen("Cows_in_Stalls.INP", "r", stdin);
+  // freopen("Cows_in_Stalls.INP", "r", stdin);
   cin >> n >> k;
+  // a[0] = INT_MIN;
+  // a[n + 1] = INT_MAX;
   for (int i = 1; i <= n; i++)
     cin >> a[i];
-  // cout << good(9) << '\n';
-  int l = 0;
-  int r = a[n];
   // Property:
   // If good(m) then also good(m + 1), good(m + 2), ...
   // Find maximum distance
+  int l = 0;
+  int r = a[n];
   while (l < r - 1)
   {
     int m = (l + r) / 2;
-    cout << m << ' ' << good(m) << '\n';
-    if (good(m))
-      r = m;
-    else
+    if (check(m))
       l = m;
+    else
+      r = m;
   }
-  cout << r;
+  cout << l;
   return 0;
 }
