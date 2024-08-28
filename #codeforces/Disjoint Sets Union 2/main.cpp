@@ -19,6 +19,8 @@ void _union(int a, int b)
 {
   a = _get(a);
   b = _get(b);
+  if (a == b)
+    return;
   if (r[a] == r[b])
     r[a]++;
   if (r[a] > r[b])
@@ -48,7 +50,7 @@ int main()
   cin.tie(NULL);
   cout.tie(NULL);
   ios_base::sync_with_stdio(false);
-  freopen("Disjoint_Sets_Union2.INP", "r", stdin);
+  // freopen("Disjoint_Sets_Union2.INP", "r", stdin);
   cin >> n >> m;
   for (int i = 1; i <= n; i++)
   {
