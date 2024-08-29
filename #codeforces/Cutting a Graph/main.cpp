@@ -43,9 +43,18 @@ void decay_set(int a, int b)
 
 bool isSameComponent(int a, int b)
 {
+  if (d[a] == 0 || d[b] == 0)
+    return false;
   a = get_set(a);
   b = get_set(b);
   return a == b;
+}
+
+void test()
+{
+  for (int i = 1; i <= n; i++)
+    cout << d[i] << ' ';
+  cout << '\n';
 }
 
 int main()
