@@ -38,11 +38,13 @@ void decay_set(int a, int b)
   if (d[a] == 0)
     p[a] = a;
   if (d[b] == 0)
-    p[b] = a;
+    p[b] = b;
 }
 
 bool isSameComponent(int a, int b)
 {
+  if (a == b)
+    return true;
   if (d[a] == 0 || d[b] == 0)
     return false;
   a = get_set(a);
@@ -62,7 +64,7 @@ int main()
   cin.tie(NULL);
   cout.tie(NULL);
   ios_base::sync_with_stdio(false);
-  freopen("Cutting_a_Graph.INP", "r", stdin);
+  // freopen("Cutting_a_Graph.INP", "r", stdin);
   cin >> n >> m >> k;
   for (int i = 1; i <= n; i++)
   {
