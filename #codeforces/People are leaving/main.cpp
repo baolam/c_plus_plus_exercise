@@ -3,7 +3,7 @@
 using namespace std;
 typedef long long ll;
 
-const int MAXN = 1e6 + 1;
+const int MAXN = 1e6 + 5;
 int n, m;
 int par[MAXN], r[MAXN], maxs[MAXN];
 
