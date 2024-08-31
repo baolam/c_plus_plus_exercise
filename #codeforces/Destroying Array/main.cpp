@@ -3,10 +3,11 @@
 using namespace std;
 typedef long long ll;
 
-const int MAXN = 1e5 + 1;
+const int MAXN = 1e5 + 2;
 bool flag[MAXN];
-int a[MAXN], p[MAXN], parent[MAXN], r[MAXN], sum[MAXN], res[MAXN];
-int n, ans = 0;
+ll a[MAXN], p[MAXN], parent[MAXN], r[MAXN], res[MAXN];
+ll sum[MAXN];
+ll n, ans = 0;
 
 void initalize_set()
 {
