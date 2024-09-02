@@ -5,8 +5,7 @@ typedef long long ll;
 
 const int MAXN = 3e5 + 2;
 int n;
-bool flag[MAXN];
-int a[MAXN], p[MAXN], r[MAXN], maxs[MAXN];
+int a[MAXN], p[MAXN], r[MAXN];
 int res[MAXN];
 
 int find_set(int x)
@@ -28,7 +27,7 @@ void unite_set(int x, int y)
   if (r[x] == r[y])
     r[x]++;
   p[y] = x;
-  maxs[x] = max(maxs[x], maxs[y]);
+  // maxs[x] = max(maxs[x], maxs[y]);
 }
 
 bool isSameSet(int x, int y)
@@ -49,26 +48,11 @@ int main()
     cin >> a[i];
     p[i] = i;
     r[i] = 0;
-    maxs[i] = i;
-    flag[i] = false;
   }
   /// Đầu ra res[i] là vị trí đổ xe của người i
   for (int i = 1; i <= n; i++)
   {
-    if (!flag[a[i]])
-    {
-      res[i] = a[i];
-      flag[a[i]] = true;
     }
-    else
-    {
-      int pos = find_set(p[i]);
-      res[i] = maxs[pos];
-      if (res[i] == n + 1)
-        res[i] = 1;
-      unite_set(p[i], res[i]);
-    }
-  }
   for (int i = 1; i <= n; i++)
     cout << res[i] << ' ';
   return 0;
