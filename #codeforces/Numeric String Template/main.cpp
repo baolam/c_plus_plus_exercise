@@ -11,11 +11,15 @@ int a[MAXN];
 bool check()
 {
   unordered_map<char, int> ma;
+  unordered_map<int, char> st;
   for (int i = 0; i < s.size(); i++)
   {
-    if (ma[s[i]] && ma[s[i]] != a[i])
+    if (ma.find(s[i]) != ma.end() && ma[s[i]] != a[i])
+      return false;
+    if (st.find(a[i]) != st.end() && st[a[i]] != s[i])
       return false;
     ma[s[i]] = a[i];
+    st[a[i]] = s[i];
   }
   return true;
 }
