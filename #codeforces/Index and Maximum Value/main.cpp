@@ -16,20 +16,19 @@ int main()
   cout.tie(NULL);
   freopen("a.INP", "r", stdin);
   cin >> t;
-  cout << t << '\n';
   while (t--)
   {
     cin >> n >> m;
     for (int i = 1; i <= n; i++)
       cin >> a[i];
     memset(p, 0, sizeof(p));
-    char x;
+    string x;
     int l, r;
     for (int i = 1; i <= m; i++)
     {
       cin >> x;
       cin >> l >> r;
-      if (x == '+')
+      if (x == "+")
         p[l]++, p[r + 1]--;
       else
         p[l]--, p[r + 1]++;
