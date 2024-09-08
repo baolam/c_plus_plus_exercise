@@ -21,6 +21,11 @@ bool check()
   int st = 1;
   while (l <= n || r <= m)
   {
+    cout << "<><><><><><><><><><><><>" << '\n';
+    cout << l << ' ' << a[l] << '\n';
+    cout << r << ' ' << b[r] << '\n';
+    cout << st << ' ' << tl << ' ' << tr << '\n';
+    cout << "<><><><><><><><><><><><>" << '\n';
     if (st > k)
       return false;
     if (tl > k / 2 || tr > k / 2)
@@ -72,11 +77,13 @@ int main()
     for (int i = 1; i <= m; i++)
       cin >> b[i];
     sort(a + 1, a + 1 + n);
-    sort(b + 1, b + 1 + n);
+    sort(b + 1, b + 1 + m);
+    cout << "----------------------------------------" << '\n';
     if (check())
       cout << "YES" << '\n';
     else
       cout << "NO" << '\n';
+    cout << "----------------------------------------" << '\n';
   }
   return 0;
 }
