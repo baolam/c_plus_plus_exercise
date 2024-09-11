@@ -3,21 +3,22 @@
 using namespace std;
 
 const int MAXN = 2e5 + 2;
+int t, n, x;
 bool a[MAXN];
 
-bool check(int n)
+bool check()
 {
-  int x;
+  bool ok = true;
   for (int i = 2; i <= n; i++)
   {
     cin >> x;
     a[x] = true;
     if (a[x - 1] || a[x + 1])
       continue;
-    return false;
+    ok = false;
   }
 
-  return true;
+  return ok;
 }
 
 int main()
@@ -27,7 +28,6 @@ int main()
   cout.tie(NULL);
 
   freopen("VAO.INP", "r", stdin);
-  int t, n, x;
   cin >> t;
   while (t--)
   {
@@ -36,7 +36,7 @@ int main()
       a[i] = false;
     cin >> x;
     a[x] = true;
-    if (check(n))
+    if (check())
       cout << "YES" << '\n';
     else
       cout << "NO" << '\n';
