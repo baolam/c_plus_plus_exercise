@@ -27,7 +27,7 @@ int main()
   cin.tie(NULL);
   cout.tie(NULL);
 
-  freopen("VAO.INP", "r", stdin);
+  // freopen("VAO.INP", "r", stdin);
   cin >> t;
   while (t--)
   {
