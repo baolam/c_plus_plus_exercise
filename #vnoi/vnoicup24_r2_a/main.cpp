@@ -3,8 +3,10 @@
 using namespace std;
 typedef long long ll;
 
+const int MAXN = 5e3 + 1;
+
 int t, n;
-ll x, tmp;
+ll x, a[MAXN];
 
 int main()
 {
@@ -12,7 +14,7 @@ int main()
   cin.tie(NULL);
   cout.tie(NULL);
 
-  // freopen("VAO.INP", "r", stdin);
+  freopen("VAO.INP", "r", stdin);
   cin >> t;
   while (t--)
   {
@@ -21,8 +23,7 @@ int main()
     for (int i = 1; i <= n; i++)
     {
       cin >> tmp;
-      ans += (int)tmp <= x;
-    }
+        }
     cout << ans << '\n';
   }
 }
