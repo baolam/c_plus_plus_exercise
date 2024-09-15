@@ -10,7 +10,7 @@ void solve()
 {
   int delta = 0;
   int start = l;
-  int cnt = 1;
+  int cnt = 0;
   while (start + delta <= r)
   {
     start += delta;
@@ -29,6 +29,7 @@ int main()
   while (t--)
   {
     cin >> l >> r;
+    solve();
   }
   return 0;
 }
