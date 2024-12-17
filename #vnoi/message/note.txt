@@ -1,0 +1,3 @@
++ Tính chất bài toán yêu cầu, từ một đỉnh phải giao liên được với tất cả các đỉnh thành phần --> SCC
++ Phải chọn lựa được đỉnh nguồn để truyền phát tin --> chọn đỉnh phát
++ Làm sao quyết định đỉnh phát --> Tối giản đồ thị (gom thành phần SCC)
