@@ -1,0 +1,2 @@
+https://oj.vnoi.info/problem/atcoder_dp_l/editorial
+Cần hiểu thêm về vấn đề lập trình này.
