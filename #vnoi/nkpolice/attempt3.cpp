@@ -1,38 +1,35 @@
 #include <bits/stdc++.h>
-#define maxn 100003
+#define MAXN 100002
+#define MAXLOG 19
 
 using namespace std;
 
 int n, m, q;
 int timeDfs = 0;
 
-int num[maxn], low[maxn], tail[maxn];
-int p[maxn][21], depth[maxn];
+int num[MAXN], low[MAXN], tail[MAXN];
+int p[MAXN][MAXLOG + 1], depth[MAXN];
+bool joint[MAXN];
 
-bool joint[maxn];
-
-vector<int> G[maxn];
+vector<int> G[MAXN];
 
 void buildP()
 {
   p[1][0] = 1;
 
-  for (int j = 1; j <= 19; j++)
+  for (int j = 1; j <= MAXLOG; j++)
   {
     for (int i = 1; i <= n; i++)
-    {
       p[i][j] = p[p[i][j - 1]][j - 1];
-    }
   }
 }
 
 int findParent(int u, int par)
 {
-  /// Tìm tổ tiên chung của u là con trực tiếp của par
-  for (int i = 19; i >= 0; i--)
+  for (int j = MAXLOG; j >= 0; j--)
   {
-    if (depth[p[u][i]] > depth[par])
-      u = p[u][i];
+    if (depth[p[u][j]] > depth[par])
+      u = p[u][j];
   }
   return u;
 }
@@ -40,7 +37,8 @@ int findParent(int u, int par)
 void dfs(int u, int prev)
 {
   int child = 0;
-  num[u] = low[u] = ++timeDfs;
+
+  low[u] = num[u] = ++timeDfs;
 
   for (int v : G[u])
   {
@@ -66,9 +64,7 @@ void dfs(int u, int prev)
         joint[u] = true;
     }
     else
-    {
       low[u] = min(low[u], num[v]);
-    }
   }
 
   tail[u] = timeDfs;
@@ -81,15 +77,16 @@ bool isSubTree(int u, int root)
 
 bool query1(int a, int b, int g1, int g2)
 {
-  /// Coi g2 là cây con trực tiếp của g1
+  // Giả sử g2 là con trực tiếp g1, nếu g1 là con g2 --> swap
   if (num[g1] > num[g2])
     swap(g1, g2);
 
-  // Nếu g1->g2 không là cạnh cầu
+  // Là cạnh cầu, không phải xoá ko ảnh hưởng
   if (low[g2] != num[g2])
-    // Không ảnh hưởng liên thông
     return true;
 
+  // Do cạnh cầu xoá sẽ làm tăng thêm 1 thành phần liên thông
+  // Kiểm tra sự tồn tại a, b đối với g2
   if (isSubTree(a, g2) && !isSubTree(b, g2))
     return false;
   if (isSubTree(b, g2) && !isSubTree(a, g2))
@@ -100,7 +97,7 @@ bool query1(int a, int b, int g1, int g2)
 
 bool query2(int a, int b, int c)
 {
-  /// Không phải đỉnh cầu
+  /// Nếu không là đỉnh khớp thì việc loại bỏ không làm ảnh hưởng thành phần liên thông
   if (!joint[c])
     return true;
 
@@ -109,8 +106,6 @@ bool query2(int a, int b, int c)
     pa = findParent(a, c);
   if (isSubTree(b, c))
     pb = findParent(b, c);
-
-  // cout << pa << ' ' << pb << '\n';
 
   if (!pa && !pb)
     return true;
@@ -152,8 +147,8 @@ int main()
   for (int i = 1, type, a, b, c, g1, g2; i <= q; i++)
   {
     bool result;
-    cin >> type;
 
+    cin >> type;
     if (type == 1)
     {
       cin >> a >> b >> g1 >> g2;

@@ -7,7 +7,7 @@ using namespace std;
 int n, m, q;
 int timeDfs = 0;
 int low[maxn], num[maxn], tail[maxn];
-int p[maxn][maxlog], depth[maxn];
+int p[maxn][maxlog + 1], depth[maxn];
 bool joint[maxn];
 
 vector<int> G[maxn];
@@ -108,6 +108,8 @@ bool query2(int a, int b, int c)
     pa = findParent(a, c);
   if (isSubTree(b, c))
     pb = findParent(b, c);
+
+  // cout << pa << ' ' << pb << '\n';
 
   if (!pa && !pb)
     return true;
